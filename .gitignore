@@ -1,1 +1,5 @@
-/node_modules/
+# for node.js
+**node_modules/
+
+# for npm
+**package-lock.json
