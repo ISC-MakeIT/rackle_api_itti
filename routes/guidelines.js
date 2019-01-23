@@ -1,20 +1,17 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* DB設定 */
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-  host : 'localhost',
-  user : 'root',
-  database : 'rackle'
+    host : 'localhost',
+    user : 'root',
+    database : 'rackle'
 });
 
 
 router.get('/:start_gate_id/:end_gate_id', (req, res, next) => {
     const start_gate_id = req.params.start_gate_id;
     const end_gate_id = req.params.end_gate_id;
-    // console.log(start_gate_id);
-    // console.log(end_gate_id);
 
     const get_start_gate = new Promise((resolve, reject) => {
         const sql = `
@@ -109,12 +106,6 @@ router.get('/:start_gate_id/:end_gate_id', (req, res, next) => {
     });
 
     Promise.all([get_start_gate, get_end_gate, get_guidelinse, get_toilets, get_elevator]).then((values) => {
-        // console.log(values);
-        // console.log(values[0]);
-        // console.dir(values[2][0]);
-        // const guidelines = values[2];
-        // console.log(guidelines[0]);
-
         let start_gate, end_gate = {};
         let guidelines, toilets, elevators = [];
 
@@ -124,7 +115,7 @@ router.get('/:start_gate_id/:end_gate_id', (req, res, next) => {
         toilets = values[3];
         elevators = values[4];
 
-        let json = {
+        const json = {
             start_gate : start_gate,
             end_gate : end_gate,
             guidelines : guidelines,

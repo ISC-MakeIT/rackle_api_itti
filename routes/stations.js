@@ -1,15 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* DB設定 */
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-  host : 'localhost',
-  user : 'root',
-  database : 'rackle'
+    host : 'localhost',
+    user : 'root',
+    database : 'rackle'
 });
 
-// 駅を取得
 router.get('/', (req, res, next) => {
     const sql = `
         SELECT
@@ -35,15 +33,10 @@ router.get('/', (req, res, next) => {
         const json = {stations : array};
         res.header('Content-Type', 'application/json; charset=UTF-8');
         res.json(json);
-
-        // console.dir(json);
-        // console.dir(rows);
     });
 });
 
-// その駅の路線を取得
 router.get('/:station_id', (req, res, next) => {
-    // console.log(req.params.station_id);
     const station_id = req.params.station_id;
     const sql = `
         SELECT
@@ -64,7 +57,6 @@ router.get('/:station_id', (req, res, next) => {
             id : rows[0].sid,
             name : rows[0].sname
         };
-        // console.log(station);
         for (let product of rows) {
             products = {
                 id : product.id,
@@ -80,14 +72,10 @@ router.get('/:station_id', (req, res, next) => {
         };
         res.header('Content-Type', 'application/json; charset=UTF-8');
         res.json(json);
-
-        // console.dir(json);
-        // console.dir(rows);
     });
 });
 
 router.get('/:station_id/train_lines/:train_line_id', (req, res, next) => {
-    // console.log(req.params);
     const station_id = req.params.station_id;
     const train_line_id = req.params.train_line_id;
     const sql = `
@@ -131,9 +119,6 @@ router.get('/:station_id/train_lines/:train_line_id', (req, res, next) => {
         };
         res.header('Content-Type', 'application/json; charset=UTF-8');
         res.json(json);
-
-        // console.dir(json);
-        // console.dir(rows);
     });
 });
 
