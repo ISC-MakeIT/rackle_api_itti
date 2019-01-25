@@ -36,8 +36,8 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/:station_id', (req, res, next) => {
-    const station_id = req.params.station_id;
+router.get('/train_lines', (req, res, next) => {
+    const station_id = req.query.station_id;
     const sql = `
         SELECT
             stations.id AS sid,
@@ -75,9 +75,9 @@ router.get('/:station_id', (req, res, next) => {
     });
 });
 
-router.get('/:station_id/train_lines/:train_line_id', (req, res, next) => {
-    const station_id = req.params.station_id;
-    const train_line_id = req.params.train_line_id;
+router.get('/train_lines/gates', (req, res, next) => {
+    const station_id = req.query.station_id;
+    const train_line_id = req.query.train_line_id;
     const sql = `
         SELECT
             train_lines.id AS tid,
