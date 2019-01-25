@@ -37,7 +37,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/train_lines', (req, res, next) => {
-    const station_id = req.query.station_id;
+    const stationId = req.query.station_id;
     const sql = `
         SELECT
             stations.id AS sid,
@@ -50,7 +50,7 @@ router.get('/train_lines', (req, res, next) => {
         WHERE
             stations.id = ? AND
             train_lines.station_id = ?`;
-    connection.query(sql, [station_id, station_id], (err, rows) => {
+    connection.query(sql, [stationId, stationId], (err, rows) => {
         const array = [];
         let products = {};
         const station = {
@@ -76,8 +76,8 @@ router.get('/train_lines', (req, res, next) => {
 });
 
 router.get('/train_lines/gates', (req, res, next) => {
-    const station_id = req.query.station_id;
-    const train_line_id = req.query.train_line_id;
+    const stationId = req.query.station_id;
+    const trainLineId = req.query.train_line_id;
     const sql = `
         SELECT
             train_lines.id AS tid,
@@ -96,10 +96,10 @@ router.get('/train_lines/gates', (req, res, next) => {
         WHERE
             train_lines.station_id = ? AND
             gates.train_line_id = ?`;
-    connection.query(sql, [station_id, train_line_id], (err, rows) => {
+    connection.query(sql, [stationId, trainLineId], (err, rows) => {
         const array = [];
         let products = {};
-        const train_line = {
+        const trainLine = {
             id : rows[0].tid,
             name : rows[0].tname
         };
@@ -114,7 +114,7 @@ router.get('/train_lines/gates', (req, res, next) => {
             array.push(products);
         };
         const json = {
-            train_line : train_line,
+            train_line : trainLine,
             gates : array
         };
         res.header('Content-Type', 'application/json; charset=UTF-8');
