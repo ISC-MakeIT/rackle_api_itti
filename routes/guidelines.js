@@ -10,10 +10,10 @@ const connection = mysql.createConnection({
 
 
 router.get('/', (req, res, next) => {
-    const start_gate_id = req.query.start_gate_id;
-    const end_gate_id = req.query.end_gate_id;
+    const startGateId = req.query.start_gate_id;
+    const endGateId = req.query.end_gate_id;
 
-    const get_start_gate = new Promise((resolve, reject) => {
+    const getStartGate = new Promise((resolve, reject) => {
         const sql = `
             SELECT
                 id,
@@ -25,12 +25,12 @@ router.get('/', (req, res, next) => {
                 gates
             WHERE
                 id = ?`
-        connection.query(sql, [start_gate_id], (err, rows) => {
+        connection.query(sql, [startGateId], (err, rows) => {
             resolve(rows);
         });
     });
 
-    const get_end_gate = new Promise((resolve, reject) => {
+    const getEndGate = new Promise((resolve, reject) => {
         const sql = `
             SELECT
                 id,
@@ -42,12 +42,12 @@ router.get('/', (req, res, next) => {
                 gates
             WHERE
                 id = ?`
-        connection.query(sql, [end_gate_id], (err, rows) => {
+        connection.query(sql, [endGateId], (err, rows) => {
             resolve(rows);
         });
     });
 
-    const get_guidelinse = new Promise((resolve, reject) => {
+    const getGuidelinse = new Promise((resolve, reject) => {
         const sql = `
             SELECT
                 location_points.latitude,
@@ -69,12 +69,12 @@ router.get('/', (req, res, next) => {
             ORDER BY
                 guidelines_x_location_points.sort`
 
-        connection.query(sql, [start_gate_id, end_gate_id], (err, rows) => {
+        connection.query(sql, [startGateId, endGateId], (err, rows) => {
             resolve(rows);
         });
     });
 
-    const get_movies = new Promise((resolve, reject) => {
+    const getMovies = new Promise((resolve, reject) => {
         const sql = `
             SELECT
                 movies.id,
@@ -100,12 +100,12 @@ router.get('/', (req, res, next) => {
             ORDER BY
                 guidelines_x_movies.sort`
 
-        connection.query(sql, [start_gate_id, end_gate_id], (err, rows) => {
+        connection.query(sql, [startGateId, endGateId], (err, rows) => {
             resolve(rows);
         });
     });
 
-    const get_toilets = new Promise((resolve, reject) => {
+    const getToilets = new Promise((resolve, reject) => {
         const sql = `
             SELECT
                 id,
@@ -120,7 +120,7 @@ router.get('/', (req, res, next) => {
         });
     });
 
-    const get_elevator = new Promise((resolve, reject) => {
+    const getElevator = new Promise((resolve, reject) => {
         const sql = `
             SELECT
                 id,
@@ -136,7 +136,7 @@ router.get('/', (req, res, next) => {
         });
     });
 
-    const get_movies_points = new Promise((resolve, reject) => {
+    const getMoviePoints = new Promise((resolve, reject) => {
         const sql = `
             SELECT
                 movies.id,
@@ -159,31 +159,31 @@ router.get('/', (req, res, next) => {
             ORDER BY
                 guidelines_x_movies.sort`
 
-        connection.query(sql, [start_gate_id, end_gate_id], (err, rows) => {
+        connection.query(sql, [startGateId, endGateId], (err, rows) => {
             resolve(rows);
         });
     });
 
-    Promise.all([get_start_gate, get_end_gate, get_guidelinse, get_movies, get_toilets, get_elevator, get_movies_points]).then((values) => {
-        let start_gate, end_gate = {};
-        let guidelines, movies, toilets, elevators, movie_points = [];
+    Promise.all([getStartGate, getEndGate, getGuidelinse, getMovies, getToilets, getElevator, getMoviePoints]).then((values) => {
+        let startGate, endGate = {};
+        let guidelines, movies, toilets, elevators, moviePoints = [];
 
-        start_gate = values[0][0];
-        end_gate = values[1][0];
+        startGate = values[0][0];
+        endGate = values[1][0];
         guidelines = values[2];
         movies = values[3];
         toilets = values[4];
         elevators = values[5];
-        movie_points = values[6];
+        moviePoints = values[6];
 
         const json = {
-            start_gate : start_gate,
-            end_gate : end_gate,
+            start_gate : startGate,
+            end_gate : endGate,
             guidelines : guidelines,
             movies : movies,
             toilets : toilets,
             elevators : elevators,
-            movie_points : movie_points
+            movie_points : moviePoints
         };
         res.header('Content-Type', 'application/json; charset=UTF-8');
         res.json(json);
