@@ -3,3 +3,7 @@
 
 # for npm
 **package-lock.json
+
+# for credentials
+*.env
+
