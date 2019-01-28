@@ -110,6 +110,7 @@ router.get('/', (req, res, next) => {
         const sql = `
             SELECT
                 id,
+                name,
                 latitude,
                 longitude,
                 floor
@@ -125,7 +126,9 @@ router.get('/', (req, res, next) => {
         const sql = `
             SELECT
                 id,
+                name,
                 size,
+                useable,
                 latitude,
                 longitude,
                 floor
