@@ -21,6 +21,9 @@ app.use('/api/stations', stationsRouter);
 const guidelinesRouter = require('./routes/guidelines');
 app.use('/api/guidelines', guidelinesRouter);
 
+const elevatorsRouter = require('./routes/elevators');
+app.use('/api/elevators', elevatorsRouter);
+
 app.use(function(req, res, next) {
     next(createError(404));
 });

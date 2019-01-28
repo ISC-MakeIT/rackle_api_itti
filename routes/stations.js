@@ -20,18 +20,7 @@ router.get('/', (req, res, next) => {
             stations`;
         
     connection.query(sql, (err, rows) => {
-        const array = [];
-        let products = {};
-        for (let product of rows) {
-            products = {
-                id : product.id,
-                name : product.name,
-                latitude : product.latitude,
-                longitude : product.longitude
-            };
-            array.push(products);
-        };
-        const json = {stations : array};
+        const json = {station : rows};
         res.header('Content-Type', 'application/json; charset=UTF-8');
         res.json(json);
     });
