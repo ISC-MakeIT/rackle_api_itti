@@ -24,11 +24,17 @@ app.use('/api/guidelines', guidelinesRouter);
 const elevatorsRouter = require('./routes/elevators');
 app.use('/api/elevators', elevatorsRouter);
 
-app.use(function(req, res, next) {
+const stationsV2Router = require('./routes/stationsV2');
+app.use('/api/v2/stations', stationsV2Router);
+
+const guidelinesV2Router = require('./routes/guidelines');
+app.use('/api/v2/guidelines', guidelinesV2Router);
+
+app.use((req, res, next) => {
     next(createError(404));
 });
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
