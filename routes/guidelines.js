@@ -1,5 +1,7 @@
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
+
+const router = require('./index');
 
 const mysql = require('mysql');
 require('dotenv').config();
@@ -11,7 +13,7 @@ const connection = mysql.createConnection({
 });
 
 
-router.get('/', (req, res, next) => {
+router.get('/guidelines', (req, res, next) => {
     const startGateId = req.query.start_gate_id;
     const endGateId = req.query.end_gate_id;
 

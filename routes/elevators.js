@@ -1,5 +1,7 @@
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
+
+const router = require('./stations');
 
 const mysql = require('mysql');
 require('dotenv').config();
@@ -10,7 +12,7 @@ const connection = mysql.createConnection({
     database : process.env.DB_DATABASE
 });
 
-router.get('/', (req, res, next) => {
+router.get('/elevators', (req, res, next) => {
     const stationId = req.query.station_id;
     const sql = `
         SELECT
