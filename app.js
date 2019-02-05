@@ -24,6 +24,12 @@ app.use('/api/guidelines', guidelinesRouter);
 const elevatorsRouter = require('./routes/elevators');
 app.use('/api/elevators', elevatorsRouter);
 
+const stationsV2Router = require('./routes/stationsV2');
+app.use('/api/v2/stations', stationsV2Router);
+
+const guidelinesV2Router = require('./routes/guidelines');
+app.use('/api/v2/guidelines', guidelinesV2Router);
+
 app.use(function(req, res, next) {
     next(createError(404));
 });
