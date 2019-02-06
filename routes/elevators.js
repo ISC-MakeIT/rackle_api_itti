@@ -1,4 +1,4 @@
-const router = require('./stations');
+const router = require('./index');
 
 const mysql = require('mysql');
 require('dotenv').config();
@@ -12,6 +12,7 @@ const connection = mysql.createConnection({
 router.get('/elevators', (req, res, next) => {
 // router.get('/stations/:station_id/elevators', (req, res, next) => {
     const stationId = req.query.station_id;
+    console.log(stationId);
     // const stationId = req.params.station_id;
     const sql = `
         SELECT
