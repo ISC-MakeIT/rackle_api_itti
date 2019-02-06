@@ -15,20 +15,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 const indexRouter = require('./routes/index');
 app.use('/api', indexRouter);
 
-const stationsRouter = require('./routes/stations');
-app.use('/api/stations', stationsRouter);
-
-const guidelinesRouter = require('./routes/guidelines');
-app.use('/api/guidelines', guidelinesRouter);
-
-const elevatorsRouter = require('./routes/elevators');
-app.use('/api/elevators', elevatorsRouter);
-
-const stationsV2Router = require('./routes/stationsV2');
-app.use('/api/v2/stations', stationsV2Router);
-
-const guidelinesV2Router = require('./routes/guidelines');
-app.use('/api/v2/guidelines', guidelinesV2Router);
+require('./routes/stations');
+require('./routes/train_lines');
+require('./routes/gates');
+require('./routes/elevators');
+require('./routes/guidelines');
 
 app.use((req, res, next) => {
     next(createError(404));
