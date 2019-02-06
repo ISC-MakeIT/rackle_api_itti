@@ -21,32 +21,6 @@ require('./routes/gates');
 require('./routes/elevators');
 require('./routes/guidelines');
 
-// const stationsRouter = require('./routes/stations');
-// app.use('/api/stations', stationsRouter);
-
-// const trainLinesRouter = require('./routes/train_lines');
-// app.use('/api/:station_id/train_lines', trainLinesRouter);
-
-// const gatesRouter = require('./routes/gates');
-// app.use('/api/:station_id/train_lines/:train_line_id/gates', gatesRouter);
-
-// const guidelinesRouter = require('./routes/guidelines');
-// app.use('/api:guidelines', guidelinesRouter);
-
-// const elevatorsRouter = require('./routes/elevators');
-// app.use('/api/stations/:station_id/elevators', elevatorsRouter);
-
-
-
-// const stationsRouter = require('./routes/stations');
-// app.use('/api/stations', stationsRouter);
-
-// const guidelinesRouter = require('./routes/guidelines');
-// app.use('/api/guidelines', guidelinesRouter);
-
-// const elevatorsRouter = require('./routes/elevators');
-// app.use('/api/elevators', elevatorsRouter);
-
 app.use((req, res, next) => {
     next(createError(404));
 });

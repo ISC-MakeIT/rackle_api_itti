@@ -1,6 +1,3 @@
-// const express = require('express');
-// const router = express.Router();
-
 const router = require('./index');
 
 const mysql = require('mysql');
@@ -130,8 +127,8 @@ router.get('/guidelines', (req, res, next) => {
             SELECT
                 id,
                 name,
-                size,
-                useable,
+                capacity,
+                usable,
                 latitude,
                 longitude,
                 floor

@@ -1,6 +1,3 @@
-// const express = require('express');
-// const router = express.Router();
-
 const router = require('./stations');
 
 const mysql = require('mysql');
@@ -13,13 +10,15 @@ const connection = mysql.createConnection({
 });
 
 router.get('/elevators', (req, res, next) => {
+// router.get('/stations/:station_id/elevators', (req, res, next) => {
     const stationId = req.query.station_id;
+    // const stationId = req.params.station_id;
     const sql = `
         SELECT
             id,
             name,
-            size,
-            useable,
+            capacity,
+            usable,
             latitude,
             longitude,
             floor

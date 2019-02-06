@@ -1,6 +1,3 @@
-// const express = require('express');
-// const router = express.Router();
-
 const router = require('./index');
 
 const mysql = require('mysql');
@@ -12,9 +9,11 @@ const connection = mysql.createConnection({
     database : process.env.DB_DATABASE
 });
 
-router.get('/stations/:station_id/train_lines/:train_line_id/gates', (req, res, next) => {
-    const stationId = req.params.station_id;
-    const trainLineId = req.params.train_line_id;
+router.get('/stations/train_lines/gates', (req, res, next) => {
+    const stationId = req.query.station_id;
+    // const stationId = req.params.station_id;
+    const trainLineId = req.query.train_line_id;
+    // const trainLineId = req.params.train_line_id;
     const sql = `
         SELECT
             train_lines.id AS tid,
