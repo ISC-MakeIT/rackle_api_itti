@@ -140,37 +140,9 @@ router.get('/guidelines', (req, res, next) => {
         });
     });
 
-    const getMoviePoints = new Promise((resolve, reject) => {
-        const sql = `
-            SELECT
-                movies.id,
-                movies.latitude,
-                movies.longitude,
-                movies.floor
-            FROM (
-                guidelines
-            INNER JOIN
-                guidelines_x_movies
-            ON
-                guidelines.id = guidelines_x_movies.guideline_id)
-            INNER JOIN
-	            movies
-            ON
-                guidelines_x_movies.movie_id = movies.id
-            WHERE
-                guidelines.start_gate_id = ? AND
-                guidelines.end_gate_id = ?
-            ORDER BY
-                guidelines_x_movies.sort`
-
-        connection.query(sql, [startGateId, endGateId], (err, rows) => {
-            resolve(rows);
-        });
-    });
-
-    Promise.all([getStartGate, getEndGate, getGuidelinse, getMovies, getToilets, getElevator, getMoviePoints]).then((values) => {
+    Promise.all([getStartGate, getEndGate, getGuidelinse, getMovies, getToilets, getElevator]).then((values) => {
         let startGate, endGate = {};
-        let guidelines, movies, toilets, elevators, moviePoints = [];
+        let guidelines, movies, toilets, elevators = [];
 
         startGate = values[0][0];
         endGate = values[1][0];
@@ -178,7 +150,6 @@ router.get('/guidelines', (req, res, next) => {
         movies = values[3];
         toilets = values[4];
         elevators = values[5];
-        moviePoints = values[6];
 
         const json = {
             start_gate : startGate,
@@ -186,8 +157,7 @@ router.get('/guidelines', (req, res, next) => {
             guidelines : guidelines,
             movies : movies,
             toilets : toilets,
-            elevators : elevators,
-            movie_points : moviePoints
+            elevators : elevators
         };
         res.header('Content-Type', 'application/json; charset=UTF-8');
         res.json(json);
