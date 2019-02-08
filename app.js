@@ -23,20 +23,20 @@ require('./routes/guidelines');
 
 /* ここから2月8日以降 /api/v2 */
 
-const StationRouterV2 = require('./routes/stations/stations.js');
-app.use('/api/v2/stations', StationRouterV2);
+// const StationRouterV2 = require('./routes/stations/stations.js');
+// app.use('/api/v2/stations', StationRouterV2);
 
-const TrainLinesRouterV2 = require('./routes/train_lines/train_lines.js');
-app.use('/api/v2/train_lines', TrainLinesRouterV2);
+// const TrainLinesRouterV2 = require('./routes/train_lines/train_lines.js');
+// app.use('/api/v2/train_lines', TrainLinesRouterV2);
 
-const GatesRouterV2 = require('./routes/gates/gates.js');
-app.use('/api/v2/gates', GatesRouterV2);
+// const GatesRouterV2 = require('./routes/gates/gates.js');
+// app.use('/api/v2/gates', GatesRouterV2);
 
-const ElevatorsRouterV2 = require('./routes/elevators/elevators.js');
-app.use('/api/v2/elevators', ElevatorsRouterV2);
+// const ElevatorsRouterV2 = require('./routes/elevators/elevators.js');
+// app.use('/api/v2/elevators', ElevatorsRouterV2);
 
-const GuidelinesRouterV2 = require('./routes/guidelines/guidelines.js');
-app.use('/api/v2/guidelines', GuidelinesRouterV2);
+// const GuidelinesRouterV2 = require('./routes/guidelines/guidelines.js');
+// app.use('/api/v2/guidelines', GuidelinesRouterV2);
 
 /* ここまで */
 
