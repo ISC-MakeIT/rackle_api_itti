@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:5.7
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb-file-format=Barracuda
+      - --innodb-file-per-table=On
+      - --innodb-large-prefix=true
+      - --explicit-defaults-for-timestamp=true
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=rackle
+    volumes:
+      - type: bind
+        source: ./initdb.d
+        target: /docker-entrypoint-initdb.d
+      - ./mysql/conf.d:/etc/mysql/conf.d
+    ports:
+      - "3306:3306"

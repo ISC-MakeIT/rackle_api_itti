@@ -6,4 +6,4 @@
 
 # for credentials
 *.env
-
+initdb.d/*.sql.gz
